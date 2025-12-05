@@ -1,5 +1,12 @@
 # python-package
 
+## Requirements
+
+* Linux/Macos/WSL
+* Python 3.14+
+* uv
+* Make
+
 ### Links
 
 This project was built using these tools:

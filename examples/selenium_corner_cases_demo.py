@@ -14,8 +14,8 @@ https://www.selenium.dev/selenium/web/web-form.html
 * hover-эффект и отправку формы.
 
 Запуск:
-    uv venv --python 3.15
-    uv sync --python 3.15
+    uv venv --python 3.14
+    uv sync --python 3.14
     uv add selenium
     uv run python courses/python_selenium_course/examples/selenium_corner_cases_demo.py
 """
