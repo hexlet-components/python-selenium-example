@@ -1,14 +1,14 @@
 install:
 	uv sync
 
-run:
-	uv run hexlet-python-package
+run-basic-selenium-demo:
+	uv run examples/basic_selenium_demo.py
+
+run-corner-cases-demo:
+	uv run examples/selenium_corner_cases_demo.py
 
 test:
 	uv run pytest
-
-test-coverage:
-	uv run pytest --cov=hexlet_python_package --cov-report xml
 
 lint:
 	uv run ruff check
