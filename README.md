@@ -22,6 +22,7 @@ make install
 
 ```bash
 make run-basic-selenium-demo
+make run-corner-cases-demo
 ```
 
 ### Run tests
