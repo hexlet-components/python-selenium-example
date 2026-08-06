@@ -20,6 +20,8 @@ Chrome откроется в обычном режиме. Если хотите 
 
 from __future__ import annotations
 
+import os
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -72,7 +74,8 @@ def run_dropdown(driver: webdriver.Chrome) -> None:
 def main() -> None:
     options = Options()
     options.add_argument("--window-size=1280,960")
-    # options.add_argument("--headless=new")
+    if os.getenv("HEADLESS"):
+        options.add_argument("--headless=new")
 
     print("=== СТАРТ ДЕМО ===")
     driver = webdriver.Chrome(options=options)

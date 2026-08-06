@@ -15,6 +15,8 @@ lint:
 
 check: test lint
 
+selfcheck: check
+
 build:
 	uv build
 

@@ -20,6 +20,7 @@ https://www.selenium.dev/selenium/web/web-form.html
 
 from __future__ import annotations
 
+import os
 import time
 
 from selenium import webdriver
@@ -164,7 +165,8 @@ def run_demo(driver: webdriver.Chrome) -> None:
 def main() -> None:
     options = Options()
     options.add_argument("--window-size=1440,900")
-    # options.add_argument("--headless=new")
+    if os.getenv("HEADLESS"):
+        options.add_argument("--headless=new")
 
     driver = webdriver.Chrome(options=options)
     try:

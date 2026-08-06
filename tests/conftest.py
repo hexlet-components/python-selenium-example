@@ -1,3 +1,4 @@
+import os
 from collections.abc import Generator
 
 import pytest
@@ -9,7 +10,8 @@ from selenium.webdriver.chrome.options import Options
 def driver() -> Generator[webdriver.Chrome, None, None]:
     options = Options()
     options.add_argument("--window-size=1440,900")
-    # options.add_argument("--headless=new")
+    if os.getenv("HEADLESS"):
+        options.add_argument("--headless=new")
 
     driver = webdriver.Chrome(options=options)
     yield driver

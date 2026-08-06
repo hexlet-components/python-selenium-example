@@ -3,7 +3,7 @@
 ## Requirements
 
 * Linux/Macos/WSL
-* Python 3.14+
+* Python 3.12+
 * uv
 * Make
 
@@ -36,6 +36,18 @@ make run-corner-cases-demo
 
 ```bash
 make test
+```
+
+### Run tests and linter
+
+```bash
+make check
+```
+
+Headless-режим для CI/сервера:
+
+```bash
+HEADLESS=1 make test
 ```
 
 [![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/assets/master/images/hexlet_logo128.png)](https://hexlet.io/?utm_source=github&utm_medium=link&utm_campaign=python-package)
