@@ -23,11 +23,16 @@ def test_login_flow(driver):
 def test_checkboxes_and_dropdown(driver):
     driver.get(f"{BASE_URL}/checkboxes")
 
-    checkbox1 = driver.find_element(By.CSS_SELECTOR, "#checkboxes input:nth-child(1)")
-    checkbox2 = driver.find_element(By.CSS_SELECTOR, "#checkboxes input:nth-child(3)")
+    checkbox1 = driver.find_element(
+        By.CSS_SELECTOR, "#checkboxes input:nth-child(1)"
+    )
+    checkbox2 = driver.find_element(
+        By.CSS_SELECTOR, "#checkboxes input:nth-child(3)"
+    )
 
-    if not checkbox1.is_selected():
-        checkbox1.click()
+    for checkbox in (checkbox1, checkbox2):
+        if not checkbox.is_selected():
+            checkbox.click()
 
     assert checkbox1.is_selected()
     assert checkbox2.is_selected()
@@ -37,6 +42,8 @@ def test_checkboxes_and_dropdown(driver):
     dropdown.click()
     dropdown.find_element(By.CSS_SELECTOR, "option[value='2']").click()
 
-    selected_text = dropdown.find_element(By.CSS_SELECTOR, "option:checked").text
+    selected_text = dropdown.find_element(
+        By.CSS_SELECTOR, "option:checked"
+    ).text
     assert selected_text == "Option 2"
 

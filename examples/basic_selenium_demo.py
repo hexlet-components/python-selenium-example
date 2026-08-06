@@ -11,17 +11,14 @@ https://the-internet.herokuapp.com/. Каждый шаг подробно объ
 3. Выбирает вариант из выпадающего списка.
 
 Команды для запуска:
-    uv venv --python 3.14
-    uv sync --python 3.14
-    uv add selenium
-    uv run python courses/python_selenium_course/examples/basic_selenium_demo.py
+    make install
+    make run-basic-selenium-demo
 
 Chrome откроется в обычном режиме. Если хотите без окна браузера,
 раскомментируйте строку с `--headless=new`.
 """
 
 from __future__ import annotations
-
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -84,7 +81,10 @@ def main() -> None:
     run_dropdown(driver)
     driver.quit()
     print("Хотите больше практики — посмотрите selenium_corner_cases_demo.py.")
-    print("Совет: попробуйте прогнать сценарий в режиме отладки, шаг за шагом — легче понять, как работают команды.")
+    print(
+        "Совет: попробуйте прогнать сценарий в режиме отладки, шаг за "
+        "шагом — легче понять, как работают команды."
+    )
 
 
 if __name__ == "__main__":
