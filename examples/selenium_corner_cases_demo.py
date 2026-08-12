@@ -17,7 +17,7 @@ https://www.selenium.dev/selenium/web/web-form.html
     uv venv --python 3.14
     uv sync --python 3.14
     uv add selenium
-    uv run python courses/python_selenium_course/examples/selenium_corner_cases_demo.py
+    uv run examples/selenium_corner_cases_demo.py
 """
 
 from __future__ import annotations
@@ -25,13 +25,13 @@ from __future__ import annotations
 import time
 
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select, WebDriverWait
-from selenium.common.exceptions import TimeoutException
 
 FORM_URL = "https://www.selenium.dev/selenium/web/web-form.html"
 WAIT_SECONDS = 10
@@ -40,7 +40,9 @@ WAIT_SECONDS = 10
 def wait_for(
     driver: webdriver.Chrome, locator: tuple[str, str]
 ) -> webdriver.remote.webelement.WebElement:
-    return WebDriverWait(driver, WAIT_SECONDS).until(EC.visibility_of_element_located(locator))
+    return WebDriverWait(driver, WAIT_SECONDS).until(
+        EC.visibility_of_element_located(locator)
+    )
 
 
 def run_demo(driver: webdriver.Chrome) -> None:
@@ -51,10 +53,15 @@ def run_demo(driver: webdriver.Chrome) -> None:
     text_input = wait_for(driver, (By.NAME, "my-text"))
     print("\n[ШАГ 1] Работаем с текстовым полем.")
     text_input.send_keys("Hexlet Student")
-    text_input.send_keys(Keys.CONTROL, "a")  # Ctrl+A обязательно, потому что .clear() в подобных формах не работает
+    text_input.send_keys(
+        Keys.CONTROL, "a"
+    )  # Ctrl+A обязательно, потому что .clear() в подобных формах не работает
     text_input.send_keys(Keys.DELETE)
     text_input.send_keys("QA Student")
-    print(f"  -> Значение после очистки и ввода: {text_input.get_attribute('value')}")
+    print(
+        "  -> Значение после очистки и ввода: "
+        f"{text_input.get_attribute('value')}"
+    )
 
     # Пароль и textarea
     password = driver.find_element(By.NAME, "my-password")
@@ -84,7 +91,9 @@ def run_demo(driver: webdriver.Chrome) -> None:
     time.sleep(0.5)
     datalist.send_keys(Keys.ARROW_DOWN)
     datalist.send_keys(Keys.TAB)
-    datalist_value = driver.find_element(By.CSS_SELECTOR, "input[list]").get_attribute("value")
+    datalist_value = driver.find_element(
+        By.CSS_SELECTOR, "input[list]"
+    ).get_attribute("value")
     print(f"  -> Значение в datalist: {datalist_value}")
 
     # Checkbox и radio
@@ -100,8 +109,10 @@ def run_demo(driver: webdriver.Chrome) -> None:
     if not primary_radio.is_selected():
         primary_radio.click()
     print(
-        f"  -> Чекбокс #{primary_checkbox.get_attribute('id')} выбран? {primary_checkbox.is_selected()}; "
-        f"Радио #{primary_radio.get_attribute('id')}? {primary_radio.is_selected()}"
+        f"  -> Чекбокс #{primary_checkbox.get_attribute('id')} "
+        f"выбран? {primary_checkbox.is_selected()}; "
+        f"Радио #{primary_radio.get_attribute('id')}? "
+        f"{primary_radio.is_selected()}"
     )
 
     # Color + date + range
@@ -112,18 +123,25 @@ def run_demo(driver: webdriver.Chrome) -> None:
     date.clear()
     date.send_keys("2025-01-15")
     slider = driver.find_element(By.NAME, "my-range")
-    # Используем JavaScript, поскольку стандартное send_keys для range не всегда срабатывает.
+    # Используем JavaScript: стандартный send_keys для range
+    # срабатывает не всегда.
     driver.execute_script(
-        "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));", slider, "7"
+        "arguments[0].value = arguments[1];"
+        "arguments[0].dispatchEvent(new Event('input'));",
+        slider,
+        "7",
     )
     print(
-        f"  -> Цвет: {color.get_attribute('value')}, Дата: {date.get_attribute('value')}, "
+        f"  -> Цвет: {color.get_attribute('value')}, "
+        f"Дата: {date.get_attribute('value')}, "
         f"Range: {slider.get_attribute('value')}"
     )
 
     # Hover
     print("\n[ШАГ 8] Hover по кнопке Submit.")
-    submit_button = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
+    submit_button = driver.find_element(
+        By.CSS_SELECTOR, "button[type='submit']"
+    )
     ActionChains(driver).move_to_element(submit_button).perform()
     print("  -> Навели курсор на кнопку отправки.")
 
@@ -134,7 +152,9 @@ def run_demo(driver: webdriver.Chrome) -> None:
         confirmation = wait_for(driver, (By.TAG_NAME, "h1"))
         print(f"  -> Ответ страницы: {confirmation.text}")
     except TimeoutException:
-        print("  -> Ответ страницы появился без заголовка h1. Проверьте вручную.")
+        print(
+            "  -> Ответ страницы появился без заголовка h1. Проверьте вручную."
+        )
 
 
 def main() -> None:
@@ -146,7 +166,8 @@ def main() -> None:
     try:
         run_demo(driver)
         print(
-            "\nВсе шаги выполнены. Для закрытия окна используйте Debug/Step Over, "
+            "\nВсе шаги выполнены. Для закрытия окна используйте "
+            "Debug/Step Over, "
             "чтобы проследить логику, или вызовите driver.quit() вручную."
         )
     finally:
