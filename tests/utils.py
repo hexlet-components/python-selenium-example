@@ -8,6 +8,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 DEFAULT_WAIT = 10
 
 
-def wait_for(driver: WebDriver, locator: Tuple[str, str], timeout: int = DEFAULT_WAIT) -> WebElement:
-    return WebDriverWait(driver, timeout).until(EC.visibility_of_element_located(locator))
-
+def wait_for(
+    driver: WebDriver, locator: Tuple[str, str], timeout: int = DEFAULT_WAIT
+) -> WebElement:
+    return WebDriverWait(driver, timeout).until(
+        EC.visibility_of_element_located(locator)
+    )

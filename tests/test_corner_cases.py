@@ -36,11 +36,16 @@ def test_corner_case_controls(driver):
     datalist = wait_for(driver, (By.CSS_SELECTOR, "input[list]"))
     datalist.send_keys("Ch")
     WebDriverWait(driver, 5).until(
-        lambda drv: drv.find_element(By.CSS_SELECTOR, "input[list]").get_attribute("value").lower().startswith("ch")
+        lambda drv: drv.find_element(By.CSS_SELECTOR, "input[list]")
+        .get_attribute("value")
+        .lower()
+        .startswith("ch")
     )
     datalist.send_keys(Keys.ARROW_DOWN)
     datalist.send_keys(Keys.TAB)
-    datalist_value = driver.find_element(By.CSS_SELECTOR, "input[list]").get_attribute("value")
+    datalist_value = driver.find_element(
+        By.CSS_SELECTOR, "input[list]"
+    ).get_attribute("value")
     assert datalist_value.lower().startswith("ch")
 
     checkbox = wait_for(driver, (By.NAME, "my-check"))
@@ -60,7 +65,8 @@ def test_corner_case_controls(driver):
     date.send_keys("2025-01-15")
     slider = driver.find_element(By.NAME, "my-range")
     driver.execute_script(
-        "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
+        "arguments[0].value = arguments[1];"
+        "arguments[0].dispatchEvent(new Event('input'));",
         slider,
         "7",
     )
@@ -68,7 +74,9 @@ def test_corner_case_controls(driver):
     assert date.get_attribute("value") == "2025-01-15"
     assert slider.get_attribute("value") == "7"
 
-    submit_button = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
+    submit_button = driver.find_element(
+        By.CSS_SELECTOR, "button[type='submit']"
+    )
     ActionChains(driver).move_to_element(submit_button).perform()
     submit_button.click()
 

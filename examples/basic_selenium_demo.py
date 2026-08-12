@@ -22,7 +22,6 @@ Chrome откроется в обычном режиме. Если хотите 
 
 from __future__ import annotations
 
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -84,9 +83,11 @@ def main() -> None:
     run_dropdown(driver)
     driver.quit()
     print("Хотите больше практики — посмотрите selenium_corner_cases_demo.py.")
-    print("Совет: попробуйте прогнать сценарий в режиме отладки, шаг за шагом — легче понять, как работают команды.")
+    print(
+        "Совет: попробуйте прогнать сценарий в режиме отладки, "
+        "шаг за шагом — легче понять, как работают команды."
+    )
 
 
 if __name__ == "__main__":
     main()
-

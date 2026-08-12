@@ -14,4 +14,3 @@ def driver() -> Generator[webdriver.Chrome, None, None]:
     driver = webdriver.Chrome(options=options)
     yield driver
     driver.quit()
-
