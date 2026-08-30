@@ -30,8 +30,11 @@ def test_checkboxes_and_dropdown(driver):
         By.CSS_SELECTOR, "#checkboxes input:nth-child(3)"
     )
 
-    if not checkbox1.is_selected():
-        checkbox1.click()
+    # Оба флажка приводятся в известное состояние: их значения по умолчанию
+    # задаёт чужая демо-страница, и тест не должен на них опираться.
+    for checkbox in (checkbox1, checkbox2):
+        if not checkbox.is_selected():
+            checkbox.click()
 
     assert checkbox1.is_selected()
     assert checkbox2.is_selected()

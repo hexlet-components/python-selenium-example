@@ -13,8 +13,9 @@ def test_corner_case_controls(driver):
 
     text_input = wait_for(driver, (By.NAME, "my-text"))
     text_input.send_keys("Hexlet Student")
-    text_input.send_keys(Keys.CONTROL, "a")
-    text_input.send_keys(Keys.DELETE)
+    # Очистка через clear(), а не через Ctrl+A и Delete: «выделить всё» на macOS
+    # это Cmd+A, поэтому на ней поле не очищалось и значение склеивалось.
+    text_input.clear()
     text_input.send_keys("QA Student")
     assert text_input.get_attribute("value") == "QA Student"
 
