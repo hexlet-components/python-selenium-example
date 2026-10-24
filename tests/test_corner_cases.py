@@ -37,10 +37,12 @@ def test_corner_case_controls(driver):
     datalist = wait_for(driver, (By.CSS_SELECTOR, "input[list]"))
     datalist.send_keys("Ch")
     WebDriverWait(driver, 5).until(
-        lambda drv: drv.find_element(By.CSS_SELECTOR, "input[list]")
-        .get_attribute("value")
-        .lower()
-        .startswith("ch")
+        lambda drv: (
+            drv.find_element(By.CSS_SELECTOR, "input[list]")
+            .get_attribute("value")
+            .lower()
+            .startswith("ch")
+        )
     )
     datalist.send_keys(Keys.ARROW_DOWN)
     datalist.send_keys(Keys.TAB)

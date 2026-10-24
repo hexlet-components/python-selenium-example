@@ -30,6 +30,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select, WebDriverWait
 
@@ -37,9 +38,7 @@ FORM_URL = "https://www.selenium.dev/selenium/web/web-form.html"
 WAIT_SECONDS = 10
 
 
-def wait_for(
-    driver: webdriver.Chrome, locator: tuple[str, str]
-) -> webdriver.remote.webelement.WebElement:
+def wait_for(driver: webdriver.Chrome, locator: tuple[str, str]) -> WebElement:
     return WebDriverWait(driver, WAIT_SECONDS).until(
         EC.visibility_of_element_located(locator)
     )
